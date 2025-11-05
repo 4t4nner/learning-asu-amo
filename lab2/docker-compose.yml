@@ -1,0 +1,34 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk17
+    container_name: jenkins_lab2
+    ports:
+      - "8089:8080"
+      - "50000:50000"
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+      - ../lab1:/var/jenkins_home/workspace/lab1
+      - ./jenkins_scripts:/usr/share/jenkins/ref/init.groovy.d
+    environment:
+      - JENKINS_OPTS=--prefix=/jenkins
+    networks:
+      - ml-net
+    restart: unless-stopped
+
+  ml-pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ml_pipeline_lab2
+    volumes: # сюда сохраняется и загружается всё после запуска
+      - ../lab1/data_gen:/app/data_gen
+      - ../lab1/data:/app/data
+      - ../lab1/models:/app/models
+    networks:
+      - ml-net
+    depends_on:
+      - jenkins
+
+networks:
+  ml-net:
+    driver: bridge

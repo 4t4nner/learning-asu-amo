@@ -1,0 +1,35 @@
+// Jenkinsfile
+pipeline {
+    agent {
+        docker {
+            image 'python:3.11-slim'
+            args '-v ${WORKSPACE}/../lab1:/app -v ${WORKSPACE}/data_gen:/app/data_gen -v ${WORKSPACE}/data:/app/data -v ${WORKSPACE}/models:/app/models'
+        }
+    }
+    stages {
+        stage('Setup Environment') {
+            steps {
+                sh '''
+                cd /app
+                pip install --no-cache-dir -r requirements.txt
+                chmod +x *.py pipeline.sh
+                '''
+            }
+        }
+        
+        stage('Run ML Pipeline') {
+            steps {
+                dir('/app') {
+                    sh './pipeline.sh'
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            archiveArtifacts artifacts: 'data_gen/**/*,data/**/*,models/**/*', fingerprint: true
+            junit 'models/*_evaluated.json'
+        }
+    }
+}
