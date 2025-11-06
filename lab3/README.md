@@ -4,7 +4,7 @@
 
 <p style="text-align: end;">Выполнил: Артём Кожевников</p>
 
-Репозиторий расположен по адресу https://github.com/4t4nner/learning-asu-amo . Этот отчет [доступен по ссылке](https://github.com/4t4nner/learning-asu-amo/lab3) 
+Репозиторий расположен по адресу https://github.com/4t4nner/learning-asu-amo . Этот отчет [доступен по ссылке](https://github.com/4t4nner/learning-asu-amo/tree/main/lab3) 
 
 ![alt text](image.png)
 
