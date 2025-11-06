@@ -12,8 +12,8 @@
 <details>
     <summary><b>Вывод `make`</b></summary>
 t4nner@w: lab2 make
-✅ Директории созданы
-✅ requirements.txt скопирован
+Директории созданы
+requirements.txt скопирован
 [+] Building 61.9s (11/11) FINISHED                                                                                                                               
  => [internal] load local bake definitions                                                                                                                   0.0s
  => => reading from stdin 555B                                                                                                                               0.0s
@@ -35,7 +35,7 @@ t4nner@w: lab2 make
  => resolving provenance for metadata file                                                                                                                   0.0s
 [+] Building 1/1
  ✔ lab2-jenkins  Built                                                                                                                                       0.0s 
-✅ Jenkins образ успешно собран
+Jenkins образ успешно собран
 [+] Building 1.7s (12/12) FINISHED                                                                                                                                
  => [internal] load local bake definitions                                                                                                                   0.0s
  => => reading from stdin 1.00kB                                                                                                                             0.0s
@@ -58,15 +58,15 @@ t4nner@w: lab2 make
  => resolving provenance for metadata file                                                                                                                   0.0s
 [+] Building 1/1
  ✔ lab2-ml-pipeline  Built                                                                                                                                   0.0s 
-✅ ML pipeline образ успешно собран
+ML pipeline образ успешно собран
 [+] Running 1/1
  ✔ Container jenkins_lab2  Started                                                                                                                           0.3s 
-🚀 Jenkins запускается в фоновом режиме...
-⏳ Ожидание полной инициализации Jenkins (120 секунд)...
-⏳ Ожидание... 10 секунд из 120
-✅ Jenkins готов к работе
-🔗 Jenkins доступен по адресу: http://localhost:8089/jenkins
-🔑 Логин: admin, Пароль: admin
+Jenkins запускается в фоновом режиме...
+Ожидание полной инициализации Jenkins (120 секунд)...
+Ожидание... 10 секунд из 120
+Jenkins готов к работе
+Jenkins доступен по адресу: http://localhost:8089/jenkins
+Логин: admin, Пароль: admin
 [+] Running 1/1
  ✔ Container ml_pipeline_lab2  Created                                                                                                                       0.1s 
 Attaching to ml_pipeline_lab2
@@ -133,7 +133,7 @@ ml_pipeline_lab2  |
 ml_pipeline_lab2  | Обновлённые метаданные с результатами сохранены: models/metadata_20251106_034354.json
 ml_pipeline_lab2  | готово
 ml_pipeline_lab2 exited with code 0
-✅ ML Pipeline успешно выполнен
+ML Pipeline успешно выполнен
 </details>
 
 #### pipeline запущен, jenkins готов к дальнейшей работе:

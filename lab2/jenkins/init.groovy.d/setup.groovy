@@ -1,4 +1,3 @@
-// jenkins/init.groovy.d/setup.groovy
 import jenkins.model.*
 import hudson.security.*
 import hudson.model.*
@@ -7,28 +6,27 @@ println "=== НАЧАЛО АВТОМАТИЧЕСКОЙ ИНИЦИАЛИЗАЦИ�
 println "Время: ${new Date()}"
 
 // Ждем полной загрузки Jenkins и плагинов
-println "⏳ Ожидание полной загрузки Jenkins и плагинов (60 секунд)..."
-sleep(60000)
+println "Ожидание полной загрузки Jenkins и плагинов (30 секунд)..."
+sleep(30 * 1000)
 
 def instance = Jenkins.getInstance()
 
 try {
-    println "🔐 Настройка безопасности..."
+    println "Пользователь admin/admin :"
     
-    // Создаем пользователя admin/admin
+    // admin/admin
     def hudsonRealm = new HudsonPrivateSecurityRealm(false)
     hudsonRealm.createAccount("admin", "admin")
     instance.setSecurityRealm(hudsonRealm)
     
-    // Настраиваем права доступа
     def strategy = new GlobalMatrixAuthorizationStrategy()
     strategy.add(Jenkins.ADMINISTER, "admin")
     strategy.add(Jenkins.READ, "anonymous")
     instance.setAuthorizationStrategy(strategy)
     
-    println "✅ Безопасность настроена"
+    println "Безопасность! end"
     
-    println "🛠️  Создание pipeline job 'ml_pipeline'..."
+    println "Создание pipeline job 'ml_pipeline'..."
     
     def jobName = "ml_pipeline"
     def job = instance.getItemByFullName(jobName)
@@ -64,17 +62,17 @@ try {
         
         // Сохраняем пайплайн
         job.setDefinition(new org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition(pipelineScript, true))
-        println "✅ Pipeline job 'ml_pipeline' успешно создан"
+        println "Pipeline job 'ml_pipeline' успешно создан"
     } else {
-        println "ℹ️  Job 'ml_pipeline' уже существует, пропускаем создание"
+        println "Job 'ml_pipeline' уже существует, пропускаем"
     }
     
     // Сохраняем все изменения
     instance.save()
-    println "✅ Все настройки успешно сохранены"
+    println "настройки end"
     
 } catch (Exception e) {
-    println "❌ ОШИБКА ПРИ ИНИЦИАЛИЗАЦИИ: ${e.getMessage()}"
+    println "ОШИБКА ПРИ ИНИЦИАЛИЗАЦИИ: ${e.getMessage()}"
     e.printStackTrace()
 }
 

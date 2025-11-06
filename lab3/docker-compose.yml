@@ -1,0 +1,13 @@
+services:
+  ml-model:
+    command: 'python train_model.py'
+    build: .
+    image: base-ml
+    volumes:
+      - .:/app
+      # Для работы с CUDA/NVIDIA GPU раскомментируйте следующие строки
+      # при условии, что на хост-машине установлен NVIDIA Container Toolkit
+      # runtime: nvidia
+      # environment:
+      #   - NVIDIA_VISIBLE_DEVICES=all
+      #   - NVIDIA_DRIVER_CAPABILITIES=all
