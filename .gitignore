@@ -1,10 +1,12 @@
+!*.dvc
+*.csv
 # ln -s
 lab2/lab1
 lab2/jenkins_home
 lab3/lect7.pdf
 
-lab*/data*
-lab*/models*
+lab*/data
+lab*/models
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
