@@ -1,6 +1,9 @@
+# docker-compose.yml
 services:
   jenkins:
-    image: jenkins/jenkins:lts-jdk17
+    build:
+      context: ./jenkins
+      dockerfile: Dockerfile
     container_name: jenkins_lab2
     ports:
       - "8089:8080"
@@ -8,26 +11,34 @@ services:
     volumes:
       - ./jenkins_home:/var/jenkins_home
       - ../lab1:/var/jenkins_home/workspace/lab1
-      - ./jenkins_scripts:/usr/share/jenkins/ref/init.groovy.d
     environment:
       - JENKINS_OPTS=--prefix=/jenkins
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
     networks:
       - ml-net
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/jenkins/login"]
+      interval: 30s
+      timeout: 10s
+      retries: 10
 
   ml-pipeline:
-    build:
+    build: 
       context: .
       dockerfile: Dockerfile
     container_name: ml_pipeline_lab2
-    volumes: # сюда сохраняется и загружается всё после запуска
+    volumes:
+      - ../lab1:/app
       - ../lab1/data_gen:/app/data_gen
       - ../lab1/data:/app/data
       - ../lab1/models:/app/models
+    working_dir: /app
     networks:
       - ml-net
     depends_on:
-      - jenkins
+      jenkins:
+        condition: service_healthy
 
 networks:
   ml-net:

@@ -1,0 +1,6 @@
+workflow-aggregator
+docker-workflow
+git
+blueocean
+matrix-auth
+credentials-binding

@@ -1,14 +1,13 @@
+# Dockerfile
 FROM python:3.11-slim
 
 WORKDIR /app
 
-# зависимости
-COPY ../lab1/requirements.txt .
+# Копируем requirements.txt и устанавливаем зависимости
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ../lab1/pipeline.sh ../lab1/*.py .
-
-# Даем права на выполнение
-RUN chmod +x pipeline.sh
+# Создаем необходимые директории
+RUN mkdir -p /app/data_gen /app/data /app/models
 
 CMD ["./pipeline.sh"]
