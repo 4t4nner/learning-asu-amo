@@ -35,7 +35,7 @@ t4nner@w: lab4 pip install -r requirements.txt
 
 
 
-### 
+### 8. Создайте датасет, в котором содержится информация о классе (“Pclass”), поле (“Sex”) и возрасте (“Age”) пассажира. Сделайте коммит в git и push в dvc.
 Я так и не смог настроить доступ к gdrive.
 ![alt text](image-4.png)
 ![alt text](image-5.png)
@@ -56,4 +56,34 @@ dvc remote add -d <branch_name> ssh://user@host<:optional_port>/path
 ![alt text](image-9.png)
 ![alt text](image-10.png)
 ![alt text](image-11.png)
+
+### 9. Создайте новую версию датасета, в котором пропущенные (nan) значения в поле “Age” будут заполнены средним значением. Сделайте коммит в git и push в dvc.
+
+
+<details>
+    <summary><b>fill_missing_age_with_mean: </b></summary>
+
+    def fill_missing_age_with_mean():
+    df = pd.read_csv(csv_path)
+    
+    missing_before = df['age'].isna().sum()
+    total_rows = len(df)
+    print(f"пропущено age: {missing_before} ({missing_before/total_rows*100:.1f}%)")
+    
+    mean_age = df['age'].mean()
+    print(f"age mean: {mean_age:.2f}")
+    
+    df['age'].fillna(mean_age, inplace=True)
+    
+    print(f"После обработки: пропущено age: {df['age'].isna().sum()}")
+    
+    df.to_csv(csv_path, index=False)
+    print(f"Файл обновлён и сохранён")
+    
+    return df
+</details>
+
+![alt text](image-12.png)
+
+### 10. Создайте новый признак с использованием one-hot-encoding для строкового признака “Пол” (“Sex”). Сделайте коммит в git и push в dvc.
 

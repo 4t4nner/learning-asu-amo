@@ -44,8 +44,22 @@ def fill_missing_age_with_mean():
     
     return df
 
+def add_sex_one_hot_encoding():
+    df = pd.read_csv(csv_path)
+    
+    
+    df = df.join(pd.get_dummies(df['sex'], prefix='sex'))
+    
+    print(df.columns)
+    
+    df.to_csv(csv_path, index=False)
+    
+    return df
+
+
 
 if __name__ == "__main__":
     # df = load_titanic_dataset()
-    fill_missing_age_with_mean()
+    # fill_missing_age_with_mean()
+    add_sex_one_hot_encoding()
     
