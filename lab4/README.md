@@ -88,3 +88,6 @@ dvc remote add -d <branch_name> ssh://user@host<:optional_port>/path
 ### 10. Создайте новый признак с использованием one-hot-encoding для строкового признака “Пол” (“Sex”). Сделайте коммит в git и push в dvc.
 
 ![alt text](image-13.png)
+
+### 11. Выполните переключение между всеми созданными версиями датасета.
+![alt text](image-14.png)
