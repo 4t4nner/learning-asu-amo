@@ -1,0 +1,4 @@
+[core]
+    remote = ssh_remote
+['remote "ssh_remote"']
+    url = ssh://t4nner@195.20.19.69:2967/home/t4nner/dev/asu/amo
